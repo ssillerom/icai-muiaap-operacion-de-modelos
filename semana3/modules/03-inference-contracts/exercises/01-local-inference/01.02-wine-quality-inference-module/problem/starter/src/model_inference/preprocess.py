@@ -17,3 +17,15 @@ FEATURE_NAMES = (
 
 # Implementa WineFeatures y preprocess_wine_request(). El orden anterior debe
 # coincidir con el artefacto, no con un orden arbitrario del CSV.
+
+class WineFeatures:
+    def __init__(self, vector: list[float]):
+        self._vector=vector
+        
+    def as_vector(self)->list[float]:
+        return self._vector
+    
+def preprocess_wine_request(request: WineQualityRequest) -> WineFeatures:
+    # Extrae los valores en el orden matemático exacto dictado por FEATURE_NAMES
+    vector = [getattr(request, name) for name in FEATURE_NAMES]
+    return WineFeatures(vector)
