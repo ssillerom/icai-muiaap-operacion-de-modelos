@@ -1,0 +1,22 @@
+[project]
+name = "icai-muiaap-operacion-de-modelos"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Pedro Perez", email = "pedroperezdiaz1@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.11.2",
+    "mlflow>=2.10.0",
+    "pandas>=3.0.6",
+    "scikit-learn>=1.9.1",
+]
+
+[project.scripts]
+icai-muiaap-operacion-de-modelos = "icai_muiaap_operacion_de_modelos:main"
+
+[build-system]
+requires = ["uv_build>=0.12.15,<0.13.0"]
+build-backend = "uv_build"

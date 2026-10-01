@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "model_version": "1.0.0",
+  "preprocessing_version": "1.0.0",
+  "feature_names": [
+    "fixed_acidity",
+    "volatile_acidity",
+    "citric_acid",
+    "residual_sugar",
+    "chlorides",
+    "free_sulfur_dioxide",
+    "total_sulfur_dioxide",
+    "density",
+    "pH",
+    "sulphates",
+    "alcohol"
+  ],
+  "output_labels": ["medio", "cojonudo", "historico"],
+  "estimator_type": "RandomForestClassifier"
+}
