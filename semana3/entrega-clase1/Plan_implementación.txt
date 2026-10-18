@@ -1,0 +1,9 @@
+-contracts.py (validar): aquí van los contratos de entrada y de salida con Pydanti(WineQualityRequestPydantic). Valida una fila ya leída del CSV,mirando que estén los 11 campos, que sean float, que estén dentro de rango y que no haya columnas de más(o lo que definamos en el contrato,esto es enn nuestro ejemplo )
+
+-preprocess.py (preparar): coge la muestra ya validada por los contratos y construye el vector ordenado de 11 números siguiendo el orden de FEATURE_NAMES que definimos nosotros también.sample_id no entra en el vector porque es solo para identificar,no sirve para predecir,lo añadiremos despues al contrato de salida
+
+-inference.py (cargar y predecir): carga el modelo del .joblib que nos han pasado y comprueba que las características que guarda coinciden con FEATURE_NAMES. Si no coinciden, falla antes de predecir. Después le pasa el vector al modelo y devuelve la predicción
+
+-predict_file.py (coordinar): es el script que se ejecuta. Lee el CSV y, fila por fila, llama a contracts, preprocess e inference. Al final escribe predictions.csv.
+
+-¿Cómo evitamos crear un CSV parcial?:Para no dejar un CSV parcial: se validan y predicen todas las filas antes de abrir el archivo de salida, y solo se escribe si todas van bien 

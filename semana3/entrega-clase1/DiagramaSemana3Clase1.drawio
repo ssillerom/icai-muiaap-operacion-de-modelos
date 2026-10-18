@@ -1,0 +1,126 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="PYKILjv5vuBwmngkyFpf">
+    <mxGraphModel dx="2311" dy="959" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-3" edge="1" parent="1" source="pBeXug-sPEhVQZrY9XdN-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="pBeXug-sPEhVQZrY9XdN-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="362.5" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=light-dark(#FFFFFF,#00CCCC);" value="" vertex="1">
+          <mxGeometry height="60" width="285" x="220" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="1. Entrada:&lt;br&gt;Fila red-001(1º fila) del CSV (12 columnas):&lt;br&gt;sample_id + 11 campos" vertex="1">
+          <mxGeometry height="30" width="252.5" x="236.25" y="75" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-9" edge="1" parent="1" source="pBeXug-sPEhVQZrY9XdN-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="pBeXug-sPEhVQZrY9XdN-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-11" edge="1" parent="1" source="pBeXug-sPEhVQZrY9XdN-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="pBeXug-sPEhVQZrY9XdN-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=light-dark(#FFFFFF,#00CCCC);" value="" vertex="1">
+          <mxGeometry height="60" width="285" x="220" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="2. Separar sample_id del resto" vertex="1">
+          <mxGeometry height="30" width="190" x="270" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-33" edge="1" parent="1" source="pBeXug-sPEhVQZrY9XdN-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="197.5" />
+              <mxPoint x="820" y="880" />
+            </Array>
+            <mxPoint x="560" y="880" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=light-dark(#6A00FF,#999900);fontColor=#ffffff;strokeColor=#3700CC;" value="" vertex="1">
+          <mxGeometry height="165" width="190" x="582.5" y="115" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="sample_id = &quot;red-001&quot;&lt;br&gt;Se guarda APARTE en una variable que llamo sample_id&lt;br&gt;NO entra al vector: solo identifica la muestra,&lt;br&gt;el modelo solo usa las 11 features." vertex="1">
+          <mxGeometry height="30" width="155" x="600" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-20" edge="1" parent="1" source="pBeXug-sPEhVQZrY9XdN-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="362.5" y="515" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-10" parent="1" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;fillColor=light-dark(#FFFFFF,#00CCCC);" value="" vertex="1">
+          <mxGeometry height="110" width="285" x="220" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-12" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="3. ¿Cumple el contrato de entrada?" vertex="1">
+          <mxGeometry height="30" width="120" x="302.5" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=light-dark(#FFFFFF,#999900);" value="" vertex="1">
+          <mxGeometry height="180" width="210" x="-30" y="265" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-15" edge="1" parent="1" source="pBeXug-sPEhVQZrY9XdN-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" target="pBeXug-sPEhVQZrY9XdN-10">
+          <mxGeometry relative="1" x="0.1619" as="geometry">
+            <Array as="points">
+              <mxPoint x="180" y="350" />
+              <mxPoint x="200" y="350" />
+              <mxPoint x="200" y="355" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-14" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="El contrato valida:&lt;br&gt;- 11 campos&amp;nbsp;&lt;br&gt;- tipo float&lt;div&gt;- rangos de valores (ej. ph 2.5–4.5)&lt;br&gt;- ningún campo extra (extra=&quot;forbid&quot;)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="210" x="-30" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=light-dark(#A20025,#D60C2E);fontColor=#ffffff;strokeColor=#6F0000;" value="" vertex="1">
+          <mxGeometry height="130" width="190" x="570" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-17" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="ValidationError&lt;br/&gt;Ej.: aparece unexpected_field&lt;br/&gt;→ type = extra_forbidden&lt;br/&gt;Se RECHAZA la muestra.&lt;br/&gt;No llega al modelo." vertex="1">
+          <mxGeometry height="30" width="172.5" x="582.5" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-18" edge="1" parent="1" source="pBeXug-sPEhVQZrY9XdN-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="570" y="355.01" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-19" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="NO" vertex="1">
+          <mxGeometry height="30" width="60" x="505" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-22" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="SI" vertex="1">
+          <mxGeometry height="30" width="60" x="362.5" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-26" edge="1" parent="1" source="pBeXug-sPEhVQZrY9XdN-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="pBeXug-sPEhVQZrY9XdN-27">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="362.5" y="700" />
+              <mxPoint x="362.5" y="700" />
+            </Array>
+            <mxPoint x="362.5" y="710" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=light-dark(#FFFFFF,#00CCCC);" value="" vertex="1">
+          <mxGeometry height="120" width="368.12" x="178.44" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-25" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="4. VECTOR ORDENADO (11 campos, en el orden que puse en&amp;nbsp; FEATURE_NAMES)&lt;br&gt;fixed_acidity, volatile_acidity, citric_acid, residual_sugar, chlorides,&lt;br&gt;free_sulfur_dioxide, total_sulfur_dioxide, density, ph, sulphates, alcohol&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="368.12" x="180.94" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-32" edge="1" parent="1" source="pBeXug-sPEhVQZrY9XdN-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="365" y="840" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-27" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=light-dark(#FFFFFF,#00CCCC);" value="" vertex="1">
+          <mxGeometry height="60" width="368.12" x="180.94" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-28" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="5. Modelo que nos pasaron(.joblib),le pasamos para el&amp;nbsp; .predict el vector" vertex="1">
+          <mxGeometry height="30" width="252.5" x="238.75" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-29" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=light-dark(#FFFFFF,#00CCCC);" value="" vertex="1">
+          <mxGeometry height="60" width="377.5" x="178.44" y="845" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-30" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="6. SALIDA (contrato de salida)&lt;br&gt;sample_id, quality_band, confianza,&lt;br&gt;model_version, preprocessing_version" vertex="1">
+          <mxGeometry height="30" width="225" x="252.5" y="860" as="geometry" />
+        </mxCell>
+        <mxCell id="pBeXug-sPEhVQZrY9XdN-34" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="sample_id vuelve a unirse a la salida" vertex="1">
+          <mxGeometry height="30" width="105" x="710" y="535" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

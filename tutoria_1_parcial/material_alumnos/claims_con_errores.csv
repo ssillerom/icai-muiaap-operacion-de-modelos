@@ -1,0 +1,5 @@
+claim_id,policy_type,driver_age,vehicle_age_years,claim_amount_eur,injuries,police_report
+C101,todo_riesgo,29,3.5,1250.50,1,1
+C102,premium,54,12,430.00,0,0
+C103,basico,16,6,640.00,0,1
+C104,basico,47,9,-350.00,0,1
