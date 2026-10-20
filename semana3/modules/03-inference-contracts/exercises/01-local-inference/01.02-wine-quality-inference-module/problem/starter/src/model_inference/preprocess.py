@@ -1,4 +1,10 @@
-"""TODO: transformación de una muestra validada en el vector del modelo."""
+"""Transformación de una muestra validada en el vector del modelo."""
+
+from dataclasses import dataclass
+
+from model_inference.contracts import WineQualityRequest
+
+PREPROCESSING_VERSION = "wine-red-features-v1"
 
 # Este contrato se entrega ya decidido: no cambies ni los nombres ni el orden.
 FEATURE_NAMES = (
@@ -15,5 +21,19 @@ FEATURE_NAMES = (
     "alcohol",
 )
 
-# Implementa WineFeatures y preprocess_wine_request(). El orden anterior debe
-# coincidir con el artefacto, no con un orden arbitrario del CSV.
+
+@dataclass(frozen=True)
+class WineFeatures:
+    """Los 11 valores ya validados, en el orden de FEATURE_NAMES."""
+
+    values: tuple[float, ...]
+
+    def as_vector(self) -> list[float]:
+        return list(self.values)
+
+
+def preprocess_wine_request(request: WineQualityRequest) -> WineFeatures:
+    values = []
+    for name in FEATURE_NAMES:
+        values.append(getattr(request, name))
+    return WineFeatures(values=tuple(values))
