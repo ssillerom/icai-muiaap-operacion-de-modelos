@@ -115,3 +115,83 @@ def test_manifest_shape_is_strict() -> None:
                 "unexpected": "not allowed",
             }
         )
+
+
+def make_bundle(bundle_path: Path) -> None:
+    """Guarda un bundle válido para romperlo después."""
+
+    estimator = make_estimator()
+    save_model_bundle(
+        bundle_path,
+        estimator,
+        create_manifest(estimator, "wine-quality-rf-v1"),
+    )
+
+
+def test_load_rejects_a_corrupt_manifest(tmp_path: Path) -> None:
+    bundle_path = tmp_path / "wine_quality_bundle"
+    make_bundle(bundle_path)
+    (bundle_path / "manifest.json").write_text("{esto no es json")
+
+    with pytest.raises(ValueError, match="no es un JSON válido"):
+        load_model_bundle(bundle_path)
+
+
+def test_load_rejects_a_missing_manifest(tmp_path: Path) -> None:
+    bundle_path = tmp_path / "wine_quality_bundle"
+    make_bundle(bundle_path)
+    (bundle_path / "manifest.json").unlink()
+
+    with pytest.raises(FileNotFoundError, match="manifest.json"):
+        load_model_bundle(bundle_path)
+
+
+def test_load_rejects_another_preprocessing_version(tmp_path: Path) -> None:
+    bundle_path = tmp_path / "wine_quality_bundle"
+    make_bundle(bundle_path)
+    manifest_path = bundle_path / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["preprocessing_version"] = "wine-red-features-v2"
+    manifest_path.write_text(json.dumps(manifest))
+
+    with pytest.raises(ValueError, match="preprocessing_version"):
+        load_model_bundle(bundle_path)
+
+
+def test_load_validates_the_manifest_before_the_binary(tmp_path: Path) -> None:
+    bundle_path = tmp_path / "wine_quality_bundle"
+    make_bundle(bundle_path)
+    (bundle_path / "model.joblib").write_bytes(b"no es un binario de joblib")
+    manifest_path = bundle_path / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["schema_version"] = "wine-quality-bundle-v0"
+    manifest_path.write_text(json.dumps(manifest))
+
+    # Falla por el manifiesto, sin llegar a deserializar el binario.
+    with pytest.raises(ValueError, match="schema_version"):
+        load_model_bundle(bundle_path)
+
+
+def test_save_rejects_an_estimator_without_predict_proba(tmp_path: Path) -> None:
+    class OnlyPredict:
+        def predict(self, features: list[list[float]]) -> list[str]:
+            return ["acceptable"]
+
+    estimator = OnlyPredict()
+
+    with pytest.raises(ValueError, match="predict_proba"):
+        save_model_bundle(
+            tmp_path / "bundle", estimator, create_manifest(estimator, "demo-v1")
+        )
+    assert not (tmp_path / "bundle").exists()
+
+
+def test_inference_message_names_the_unknown_label() -> None:
+    estimator = UnknownLabelEstimator()
+    bundle = LoadedModelBundle(
+        estimator=estimator,
+        manifest=create_manifest(estimator, "bad-output-v1"),
+    )
+
+    with pytest.raises(ValueError, match="'unknown'"):
+        infer_wine_quality(bundle, make_request())
