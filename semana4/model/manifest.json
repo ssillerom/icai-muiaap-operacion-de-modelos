@@ -1,0 +1,28 @@
+{
+    "schema_version" : "",
+    "model_version":"",
+    "preprocessing_version" : "",
+    "feature_names" : ["fixed_acidity",
+        "volatile_acidity",
+        "citric_acid",
+        "residual_sugar",
+        "chlorides",
+        "free_sulfur_dioxide",
+        "total_sulfur_dioxide",
+        "density",
+        "ph",
+        "sulphates",
+        "alcohol"
+    ],
+    "output_labels": ["good", "excellent", "needs_review"],
+    "estimator_type": {
+        "RandomForestClassifier" : {
+        "class_weight" : "balanced_subsample",
+        "max_depth" : 8,
+        "min_samples_leaf" : 2,
+        "n_estimators" : 200,
+        "random_state" : 42
+
+        }
+    }
+}
