@@ -1,0 +1,1 @@
+El CLI valida todas las filas antes de escribir, así que nunca queda un CSV parcial. 

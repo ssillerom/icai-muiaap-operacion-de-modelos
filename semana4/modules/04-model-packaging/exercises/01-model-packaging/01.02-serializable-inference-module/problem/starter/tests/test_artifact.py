@@ -115,3 +115,20 @@ def test_manifest_shape_is_strict() -> None:
                 "unexpected": "not allowed",
             }
         )
+
+
+def test_load_rejects_a_different_preprocessing_version(tmp_path: Path) -> None:
+    bundle_path = tmp_path / "wine_quality_bundle"
+    estimator = make_estimator()
+    save_model_bundle(
+        bundle_path,
+        estimator,
+        create_manifest(estimator, "wine-quality-rf-v1"),
+    )
+    manifest_path = bundle_path / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["preprocessing_version"] = "wine-red-features-v2"
+    manifest_path.write_text(json.dumps(manifest))
+
+    with pytest.raises(ValueError, match="preprocessing_version incompatible"):
+        load_model_bundle(bundle_path)
