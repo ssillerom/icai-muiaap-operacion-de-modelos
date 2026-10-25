@@ -1,0 +1,13 @@
+claim_id,decision,risk_probability
+C001,tramitacion_normal,0.143
+C002,tramitacion_normal,0.078
+C003,tramitacion_normal,0.261
+C004,revision_manual,0.869
+C005,tramitacion_normal,0.032
+C006,revision_manual,0.512
+C007,tramitacion_normal,0.063
+C008,tramitacion_normal,0.057
+C009,revision_manual,0.949
+C010,tramitacion_normal,0.05
+C011,tramitacion_normal,0.04
+C012,tramitacion_normal,0.321

@@ -1,3 +1,11 @@
+# Este archivo comprueba el programa completo desde fuera.
+
+# Crea un modelo de prueba (write_instructor_model(...))
+# Crea un CSV (write_input_csv(...))
+# Ejecuta mi programa real (completed = run_predict_file(...)). Dentro de
+#   esta función, ejecuta: python -m model_inference.predict_file
+
+
 import csv
 import subprocess
 import sys
