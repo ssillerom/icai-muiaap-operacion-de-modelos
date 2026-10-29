@@ -81,3 +81,7 @@ certeza del modelo. Tampoco anides columnas o expanders.
 - una captura o nota que demuestre que la telemetría no incluye las features;
 - lista breve de las decisiones que se conservan para sustituir el gateway por
   HTTP en S7.
+
+- Se cachea el modelo y no contiene datos de una petición porque el modelo es un objeto pesado que no cambia entre peticiones, mientras que los datos de una petición son específicos de cada solicitud y no deben ser almacenados en caché.
+
+- Se conservaran las decisiones de la interfaz de usuario, la gestión de estado, la presentación de resultados y la telemetría. Esto permitirá mantener la consistencia en la experiencia del usuario y asegurar que los datos relevantes se recopilen y presenten adecuadamente, incluso cuando se cambie el método de comunicación con el modelo.

@@ -8,6 +8,7 @@ from uuid import uuid4
 
 from model_ui.contracts import UiState
 from model_ui.gateway import InferenceGateway
+from model_ui.presentation import build_prediction_view, to_user_facing_error
 from model_ui.telemetry import Telemetry
 
 StateEmitter = Callable[[UiState], None]
@@ -38,7 +39,33 @@ class PredictionController:
         emit: StateEmitter | None = None,
     ) -> UiState:
         """TODO: emite loading, mide, valida la salida y devuelve success/error."""
+        request_id = self._request_id_factory()
 
-        raise NotImplementedError(
-            "TODO: implementa la transición loading -> success/error"
-        )
+        if emit is not None:
+            emit(UiState(phase="loading", request_id=request_id))
+
+        start_time = self._clock()
+
+        try:
+            prediction = self.gateway.predict(values)
+            latency_ms = round((self._clock() - start_time) * 1000, 3)
+            view = build_prediction_view(prediction, latency_ms)
+            state = UiState(phase="success", request_id=request_id, view=view)
+            self.telemetry.record_success(
+                latency_ms,
+                model_version=prediction.model_version,
+                preprocessing_version=prediction.preprocessing_version,
+            )
+        except Exception as error:
+            latency_ms = round((self._clock() - start_time) * 1000, 3)
+            user_error = to_user_facing_error(error, request_id)
+            state = UiState(phase="error", request_id=request_id, error=user_error)
+            self.telemetry.record_error(
+                latency_ms=latency_ms,
+                code=user_error.code,
+            )
+
+        if emit is not None:
+            emit(state)
+
+        return state

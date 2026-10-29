@@ -49,6 +49,8 @@ def build_gateway(
 
     # TODO S7.5: si api_url contiene una URL, prioriza
     # HttpInferenceGateway(api_url) sobre los gateways locales de S6.
+    if api_url and api_url.strip():
+        return HttpInferenceGateway(api_url)
     if not bundle_value:
         return DemoGateway()
     try:

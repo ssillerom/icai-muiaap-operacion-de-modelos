@@ -80,3 +80,6 @@ que no sea un objeto JSON. Comprueba el test de contrato de salida.
 - salida de un `200` y un `422`;
 - una frase que explique por qué no conviene reintentar ciegamente un POST;
 - ningún cambio en la API de caja negra.
+
+
+No conviene reintentar POST orque no es una operación idempotente, lo que puede provocar que una petición que sí llegó al servidor se ejecute varias veces y genere duplicados no deseados

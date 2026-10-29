@@ -1,0 +1,6 @@
+sample_id,quality_band,confidence,model_version,preprocessing_version
+red-001,needs_review,0.8637529232968751,wine-quality-rf-v1,wine-red-features-v1
+red-002,needs_review,0.8154491237086176,wine-quality-rf-v1,wine-red-features-v1
+red-003,acceptable,0.6167636066419362,wine-quality-rf-v1,wine-red-features-v1
+red-004,needs_review,0.7603700833115055,wine-quality-rf-v1,wine-red-features-v1
+red-005,needs_review,0.7330270207757933,wine-quality-rf-v1,wine-red-features-v1

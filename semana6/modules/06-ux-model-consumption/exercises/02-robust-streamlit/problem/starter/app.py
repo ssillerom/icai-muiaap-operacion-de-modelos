@@ -75,16 +75,45 @@ def collect_values(st: Any) -> tuple[bool, dict[str, float]]:
 
 def get_cached_gateway(st: Any, bundle_value: str | None) -> InferenceGateway:
     """TODO: usa `st.cache_resource` sobre el gateway, no sobre la respuesta."""
+    @st.cache_resource
+    def _load_gateway(bundle: str | None) -> InferenceGateway:
+        return build_gateway(bundle)
 
-    raise NotImplementedError("TODO: cachea el gateway heredado de S5")
+    return _load_gateway(bundle_value)
 
 
 def render_state(st: Any, state: UiState, target: Any | None = None) -> None:
     """TODO: presenta idle/loading/success/error en un target de Streamlit."""
 
-    raise NotImplementedError("TODO: renderiza el estado sin mostrar excepciones")
-
-
+    if target is not None:
+        render = target
+    else:
+        render = st
+    
+    if state.phase == "idle":
+        render.info("La app está lista para recibir datos. Completa el formulario")
+        return
+    elif state.phase == "loading":
+        render.info("Ejecutando inferencia…")
+        return
+    elif state.phase == "success":
+        cols = render.columns(3)
+        cols[0].metric("Calidad", state.view.quality_label)
+        cols[1].metric("Confianza", state.view.confidence_label)
+        cols[2].metric("Latencia", state.view.latency_ms)
+    
+        if state.view.confidence_level == "low":
+            render.warning(state.view.confidence_message)
+        elif state.view.confidence_level == "medium":
+            render.info(state.view.confidence_message)
+        else:
+            render.success(state.view.confidence_message)
+        return
+    elif state.phase == "error":
+        render.error(f"{state.error.title}: {state.error.message}")
+        render.info(f"Recuperación: {state.error.recovery}")
+        render.caption(f"Request ID: {state.error.request_id}")
+        return
 def main() -> None:
     """Ejecuta la app de S5 con estado avanzado de S6."""
 

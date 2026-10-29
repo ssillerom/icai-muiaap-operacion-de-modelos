@@ -3,9 +3,15 @@
 from __future__ import annotations
 
 import argparse
+from csv import DictReader, DictWriter
 from pathlib import Path
 
-from model_packaging.artifact import DEFAULT_BUNDLE_PATH
+from model_packaging.artifact import (
+    DEFAULT_BUNDLE_PATH,
+    infer_wine_quality,
+    load_model_bundle,
+)
+from model_packaging.contracts import WineQualityRequest
 
 
 def predict_file(
@@ -14,8 +20,29 @@ def predict_file(
     bundle_path: Path,
 ) -> int:
     """TODO: valida todas las filas y escribe el CSV solo al final."""
+    csv_reader = DictReader(input_path.open())
+    bundle = load_model_bundle(bundle_path)
+    result = []
+    for row in csv_reader:
+        prep_row = {key: value for key, value in row.items() if key != "sample_id"}
+        x = WineQualityRequest.model_validate(prep_row)
+        prediction = infer_wine_quality(bundle, x)
+        result.append(prediction)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    raise NotImplementedError("Implementa predict_file().")
+    with output_path.open("w", newline="", encoding="utf-8") as f:
+        writer = DictWriter(
+            f,
+            fieldnames=[
+                "quality_band",
+                "confidence",
+                "model_version",
+                "preprocessing_version",
+            ],
+        )
+        writer.writeheader()
+        writer.writerows(prediction.model_dump() for prediction in result)
+    return len(result)
 
 
 def parse_args() -> argparse.Namespace:
