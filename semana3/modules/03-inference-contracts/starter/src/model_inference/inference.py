@@ -10,7 +10,7 @@ def load_wine_quality_model(path=DEFAULT_MODEL_PATH):
     model=joblib.load(path)
     if not isinstance(model, dict):
         raise TypeError(f"Se esperaba un dict, llegó {type(model).__name__}")
-    estimator=model.get("feature_names")
+    estimator=model["estimator"]
     ##hecho con ia
     if not (callable(getattr(estimator, "predict", None))
             and callable(getattr(estimator, "predict_proba", None))):
