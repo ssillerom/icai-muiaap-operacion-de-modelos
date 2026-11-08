@@ -1,4 +1,8 @@
-"""Errores que la capa de UX debe convertir en acciones."""
+"""Errores personalizados y su conversión para la capa de UX."""
+
+from __future__ import annotations
+
+from model_ui.contracts import UserFacingError
 
 
 class InputContractError(ValueError):
@@ -15,3 +19,4 @@ class InferenceTimeoutError(TimeoutError):
 
 class BackendInferenceError(RuntimeError):
     """El backend no produjo una salida compatible."""
+
