@@ -1,0 +1,11 @@
+{
+  "antelacion_dias": -5,
+  "noches": 3,
+  "adultos": 4,
+  "ninos": 4,
+  "precio_noche": 120.0,
+  "canal": "email",
+  "cancelaciones_previas": 0,
+  "peticiones_especiales": 1,
+  "mascota": "perro"
+}

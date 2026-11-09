@@ -1,0 +1,1 @@
+"""Variables del modelo."""

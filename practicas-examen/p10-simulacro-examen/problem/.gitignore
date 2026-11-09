@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Entorno virtual (se recrea con uv sync)
+.venv
+
+# Caches
+.pytest_cache/

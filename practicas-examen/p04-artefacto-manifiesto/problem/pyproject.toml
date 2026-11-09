@@ -1,0 +1,28 @@
+[project]
+name = "reservas"
+version = "0.4.0"
+description = "Modelo de riesgo de cancelacion de reservas de hotel"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "joblib",
+    "pandas",
+    "pydantic",
+    "scikit-learn",
+]
+
+[project.scripts]
+entrenar = "reservas.train:main"
+predecir = "reservas.predict:main"
+
+[dependency-groups]
+dev = [
+    "pytest",
+]
+
+[build-system]
+requires = ["uv_build>=0.8,<0.11"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

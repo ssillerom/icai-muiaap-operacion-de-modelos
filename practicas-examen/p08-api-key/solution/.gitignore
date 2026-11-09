@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Entorno virtual (se recrea con uv sync)
+.venv
+
+# Artefactos generados (se recrean con uv run entrenar)
+models/
+
+# Caches
+.pytest_cache/
+
+# Secretos locales (copia .env.example a .env)
+.env

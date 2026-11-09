@@ -1,0 +1,10 @@
+{
+  "antelacion_dias": 30,
+  "noches": 3,
+  "adultos": 2,
+  "ninos": 0,
+  "precio_noche": 120.0,
+  "canal": "web",
+  "cancelaciones_previas": 0,
+  "peticiones_especiales": 1
+}
