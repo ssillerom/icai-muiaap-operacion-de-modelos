@@ -26,7 +26,7 @@ El starter conserva de S5:
 - el adaptador del bundle de S4;
 - la presentación mínima del formulario.
 
-El alumno implementa los componentes avanzados de `session.py`,
+El alumno implementa los componentes avVanzados de `session.py`,
 `policies.py`, `presentation.py`, `controller.py` y el cableado avanzado de
 `app.py`.
 

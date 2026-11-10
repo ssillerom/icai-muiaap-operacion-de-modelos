@@ -7,6 +7,7 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
+
 from model_ui.contracts import PredictionPayload
 from model_ui.errors import ArtifactUnavailableError, InputContractError
 from model_ui.gateway import InferenceGateway, PackagedBundleGateway
@@ -41,22 +42,36 @@ def render_inference_error(st: Any) -> None:
 
 def collect_values(st: Any) -> tuple[bool, dict[str, float]]:
     """TODO: renderiza ``FIELD_SPECS`` dentro de un único ``st.form``.
+   
 
     Cada ``number_input`` debe recibir label, rango, default, step y una key
     estable. Devuelve ``(submitted, values)`` sin llamar al gateway.
     """
-
-    raise NotImplementedError(
-        f"TODO: renderiza los {len(FIELD_SPECS)} campos de FIELD_SPECS"
-    )
-
+    values={}
+    with st.form("wine_quality_form"):
+        for spec in FIELD_SPECS:
+            values[spec.name]=st.number_input(
+                spec.label,
+                min_value=spec.min_value,
+                max_value=spec.max_value,
+                value=spec.default, 
+                step=spec.step,
+                key=f"input_{spec.name}"
+            )
+        submitted=st.form_submit_button("Ejecutar inferencia")
+    return submitted, values
+    
 
 def render_prediction(st: Any, prediction: PredictionPayload) -> None:
     """TODO: presenta los cuatro campos de ``PredictionPayload``."""
+    if prediction.quality_band == "excellent":
+        st.success(f"quality_band: {prediction.quality_band}")
+    else:
+        st.write(f"quality_band: {prediction.quality_band}")
+    st.write(f"confidence: {prediction.confidence}")
+    st.write(f"model_version: {prediction.model_version}")
+    st.write(f"preprocessing_version: {prediction.preprocessing_version}")
 
-    raise NotImplementedError(
-        "TODO: presenta quality_band, confidence y las dos versiones"
-    )
 
 
 def run_app(st: Any, gateway: InferenceGateway) -> None:

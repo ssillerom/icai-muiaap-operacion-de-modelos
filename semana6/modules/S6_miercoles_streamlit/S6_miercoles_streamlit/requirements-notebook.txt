@@ -1,0 +1,6 @@
+streamlit==1.65.0
+nbclient
+nbformat
+ipykernel
+jupyter
+pytest
