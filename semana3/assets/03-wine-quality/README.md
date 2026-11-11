@@ -13,3 +13,6 @@ las columnas a `snake_case`; se ha eliminado la columna objetivo `quality`.
 El archivo completo se usa únicamente para que el profesorado genere el
 artefacto local `models/wine_quality_classifier.joblib`. Ese artefacto y los
 datos de entrenamiento no se versionan en Git.
+
+
+
