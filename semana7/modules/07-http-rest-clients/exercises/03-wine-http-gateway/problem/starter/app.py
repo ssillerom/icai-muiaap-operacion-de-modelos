@@ -48,7 +48,7 @@ def build_gateway(
     """Selecciona el bundle configurado o conserva el gateway demo de S5. AÑADIMOS EL DE API"""
     # TODO S7.5: si api_url contiene una URL, prioriza
     # HttpInferenceGateway(api_url) sobre los gateways locales de S6.
-    if api_url is not None and api_url.strip() != "":
+    if api_url is not None and api_url.strip() != "": # el test comprueba que no esté vacío la url
         return HttpInferenceGateway(api_url)
     if not bundle_value:
         return DemoGateway()

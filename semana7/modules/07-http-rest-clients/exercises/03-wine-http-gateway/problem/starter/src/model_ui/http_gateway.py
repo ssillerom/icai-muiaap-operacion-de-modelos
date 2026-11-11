@@ -84,7 +84,6 @@ class HttpInferenceGateway:
             return(PredictionPayload.model_validate(body["prediction"]))
         except (ValidationError, KeyError) as error:
             raise BackendInferenceError("error en el formato de la prediccion")
-        return body
 
     @staticmethod
     def _read_object(response: Any) -> dict[str, Any]:
