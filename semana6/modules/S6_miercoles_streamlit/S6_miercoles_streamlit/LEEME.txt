@@ -1,0 +1,46 @@
+S5 miercoles - Streamlit con memoria (stateful apps)
+Material nuevo, fuera del repo del curso. Solo miercoles 14 oct. Datos ficticios, sin S4.
+
+CONTENIDO
+  S5_miercoles_guiado.ipynb   Notebook paso a paso: explica, ensena el script y lo comprueba.
+  scripts/                    Los mismos conceptos como scripts Python (01 a 05 + modelo.py).
+  tests/test_miercoles.py     5 pruebas automaticas (pytest).
+  requirements.txt            streamlit==1.65.0
+  requirements-notebook.txt   anade jupyter, nbclient, pytest.
+
+INSTALAR (Python 3.10 o superior)
+  python -m venv .venv && source .venv/bin/activate     (Windows: .venv\Scripts\activate)
+  pip install -r requirements-notebook.txt
+  jupyter lab S5_miercoles_guiado.ipynb                 (abrir desde esta carpeta)
+
+COMO USARLO EN CLASE (2 x 60 min)
+  Parte 1, notebook (60'):
+   1. Contador roto: el script se reejecuta entero, count vuelve a 0 (scripts/01).
+   2. session_state con guard "if key not in st.session_state" (02).
+   3. Callbacks: on_click=increment, sin parentesis; el callback corre antes del rerun (03).
+   4. Form Churn + historial (04): una fila por submit; el historial se dibuja desde el estado,
+      fuera del form. Cambiar un input sin enviar no anade fila; activar "Mostrar ayuda" tampoco.
+   Cada paso se comprueba con AppTest y, en los pasos "Pruébalo tú", la celda lanzar() arranca la app Streamlit real y la muestra dentro del notebook (iframe) para pulsar los botones. Tambien se puede abrir en terminal:
+      cd scripts && python -m streamlit run 04_app_ejemplo.py
+  Parte 2, practica (60'): scripts/05_practica_starter.py, completar tres huecos:
+   A  inicializar history con guard.
+   B  en el callback, anadir {**inputs, **result} a history.
+   C  dibujar st.metric y st.dataframe desde el estado.
+  Comprobaciones para el alumno: 0 filas al abrir; 3 tras tres submits; la ayuda no anade fila;
+  Vaciar historial vuelve a 0. Solucion = 04_app_ejemplo.py (no repartirlo hasta el final).
+
+ERRORES TIPICOS
+  - Inicializar sin guard (history = [] en cada rerun): se borra la memoria.
+  - on_click=funcion() en vez de on_click=funcion.
+  - Predecir en el cuerpo del script en vez de en el callback: filas duplicadas.
+  - Dibujar el historial solo dentro de "if submit".
+  - Esperar que el estado sobreviva a recargar el navegador: es por sesion, no es una base de datos.
+
+VERIFICADO (14 oct 2026, Python 3.10, Streamlit 1.65.0)
+  - Notebook ejecutado completo, sin errores.
+  - pytest: 5 pruebas OK (incluye starter con A-C resueltos).
+  - Las 5 apps arrancan con streamlit run (health check OK).
+  - Run All en JupyterLab real (Chrome): sin errores, app embebida con historial de 3 filas tras 3 submits.
+NO VERIFICADO
+  - Portatiles del aula, Windows/macOS, Databricks/Colab. Probar antes de clase.
+  - Si el iframe no se ve en tu entorno, abre http://localhost:PUERTO (se imprime al lanzar).

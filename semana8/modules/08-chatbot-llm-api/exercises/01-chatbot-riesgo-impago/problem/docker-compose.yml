@@ -1,0 +1,22 @@
+# Extra opcional: levanta la API y el frontend. Uso: docker compose up --build
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      # Vacio = LLM simulado. Para un LLM real: LLM_MODEL=azure/<deployment> y sus claves
+      - LLM_MODEL=${LLM_MODEL:-}
+      - AZURE_API_KEY=${AZURE_API_KEY:-}
+      - AZURE_API_BASE=${AZURE_API_BASE:-}
+      - AZURE_API_VERSION=${AZURE_API_VERSION:-}
+
+  streamlit:
+    build: .
+    command: ["streamlit", "run", "frontend/app.py", "--server.address=0.0.0.0", "--server.port=8501"]
+    ports:
+      - "8501:8501"
+    environment:
+      - API_URL=http://api:8000
+    depends_on:
+      - api

@@ -76,13 +76,39 @@ def collect_values(st: Any) -> tuple[bool, dict[str, float]]:
 def get_cached_gateway(st: Any, bundle_value: str | None) -> InferenceGateway:
     """TODO: usa `st.cache_resource` sobre el gateway, no sobre la respuesta."""
 
-    raise NotImplementedError("TODO: cachea el gateway heredado de S5")
+    @st.cache_resource
+    def _load_gateway(path_str: str | None) -> InferenceGateway:
+        return build_gateway(path_str)
+    
+    return _load_gateway(bundle_value)
 
 
 def render_state(st: Any, state: UiState, target: Any | None = None) -> None:
     """TODO: presenta idle/loading/success/error en un target de Streamlit."""
+    """Presenta idle/loading/success/error en un target de Streamlit."""
+    # Si se pasa un target (como un st.empty()), usamos ese contenedor; si no, usamos st directamente
+    container = target if target is not None else st
 
-    raise NotImplementedError("TODO: renderiza el estado sin mostrar excepciones")
+    with container:
+        if state.phase == "idle":
+            container.info("Configura los valores del vino y pulsa 'Ejecutar inferencia' para comenzar.")
+            
+        elif state.phase == "loading":
+            container.write("Calculando predicción...")
+            
+        elif state.phase == "success":
+            container.success("¡Inferencia completada con éxito!")
+            # Muestra los datos devueltos por el modelo
+            container.metric(label="Resultado de Predicción", value=str(state.data))
+            
+        elif state.phase == "error":
+            # Extraemos el UserFacingError encapsulado en el estado
+            err = state.error
+            container.error(f"**{err.title}**: {err.message}")
+            container.warning(f"💡 **Cómo solucionarlo:** {err.recovery}")
+            container.caption(f"ID de solicitud (para soporte): `{err.request_id}`")
+
+   
 
 
 def main() -> None:
