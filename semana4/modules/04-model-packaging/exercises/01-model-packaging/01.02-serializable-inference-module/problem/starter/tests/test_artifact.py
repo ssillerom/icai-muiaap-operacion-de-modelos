@@ -115,3 +115,59 @@ def test_manifest_shape_is_strict() -> None:
                 "unexpected": "not allowed",
             }
         )
+
+# Comprobar un manifiesto inválido
+def test_load_rejects_corrupt_manifest(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+
+    bundle_path = tmp_path / "bundle"
+    bundle_path.mkdir()
+
+    # Crear un manifiesto con JSON incorrecto
+    (bundle_path / "manifest.json").write_text(
+        "{esto no es json",
+        encoding="utf-8",
+    )
+
+    # Crear un archivo de modelo de prueba
+    (bundle_path / "model.joblib").write_bytes(b"modelo de prueba")
+
+    # Comprobar que no se intenta cargar el estimador
+    def forbidden_load(path):
+        raise AssertionError("No se debe cargar el modelo")
+
+    monkeypatch.setattr(
+        "model_packaging.artifact.joblib.load",
+        forbidden_load,
+    )
+
+    with pytest.raises(ValueError):
+        load_model_bundle(bundle_path)
+
+
+
+
+# Comprobar probabilidades inválidas
+def test_inference_rejects_invalid_probabilities() -> None:
+
+    class BadProbabilityEstimator:
+        classes_ = ["acceptable"]
+
+        def predict(self, features):
+            return ["acceptable"]
+
+        def predict_proba(self, features):
+            return [[1.5]]
+
+    estimator = BadProbabilityEstimator()
+
+    bundle = LoadedModelBundle(
+        estimator=estimator,
+        manifest=create_manifest(estimator, "test-v1"),
+    )
+
+    with pytest.raises(ValueError, match="entre 0 y 1"):
+        infer_wine_quality(bundle, make_request())
+

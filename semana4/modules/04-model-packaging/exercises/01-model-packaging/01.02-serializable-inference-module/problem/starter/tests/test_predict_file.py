@@ -86,3 +86,63 @@ def test_predict_file_writes_nothing_when_a_later_row_is_invalid(
         predict_file(input_path, output_path, bundle_path)
 
     assert not output_path.exists()
+
+
+
+# Comprobar 5 predicciones y la ejecución del CLI
+def test_cli_generates_five_predictions(tmp_path: Path) -> None:
+    import os
+    import subprocess
+    import sys
+
+    bundle_path = tmp_path / "bundle"
+    input_path = tmp_path / "five_wines.csv"
+    output_path = tmp_path / "predictions.csv"
+
+    write_bundle(bundle_path)
+
+    rows = [
+        {
+            "sample_id": f"red-{i:03d}",
+            **{key: str(value) for key, value in WINE_SAMPLE.items()},
+        }
+        for i in range(1, 6)
+    ]
+
+    write_input(input_path, rows=rows)
+
+    project_path = Path(__file__).resolve().parents[1]
+
+    environment = dict(os.environ)
+    environment["PYTHONPATH"] = str(project_path / "src")
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "model_packaging.predict_file",
+            "--bundle",
+            str(bundle_path),
+            "--input",
+            str(input_path),
+            "--output",
+            str(output_path),
+        ],
+        cwd=project_path,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 5, result.stderr
+
+    with output_path.open(newline="", encoding="utf-8") as source:
+        predictions = list(csv.DictReader(source))
+
+    assert len(predictions) == 5
+
+    assert all(
+        row["model_version"] == "wine-quality-rf-v1"
+        for row in predictions
+    )
